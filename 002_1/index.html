@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link rel="stylesheet" href="theme.css" />
+  </head>
+  <body>
+
+    <div class="container pt-5" id="app">
+      <div class="card">
+          <h1 :style="{
+            color: inputValue.length < 5 ? 'darkred' : 'darkblue',
+           fontSize: inputValue.length < 6 ? '1.5rem' : '2rem'}
+           ">{{ title }}</h1>
+          <div class="form-control" >
+            <input type="text" name="" id=""
+              :placeholder="placeholderString"
+              v-model="inputValue"
+              @keypress.enter="addNewNote"
+             >
+          </div>
+          <button class="btn" @click="addNewNote">Добавить</button>
+          <hr>
+          <ul class="list" v-if="notes.length !== 0">
+            <li class="list-item" v-for="(myNote, i) in notes">
+              <!-- <span :class="myNote.length > 5 ? 'primary' : 'bold'">{{ toUpperCase(myNote) }}</span> -->
+              <!-- <span :class="{
+                'primary': true,
+                'bold': myNote.length > 5
+              }">{{ toUpperCase(myNote) }}</span> -->
+              <span :class="['bold', {'primary': myNote.length > 5}]">{{ toUpperCase(myNote) }}</span>
+              <button class="btn danger" @click="removeNote(i, $event)">удалить</button>
+            </li>
+            <hr>
+            <li>
+              <strong>Общее количество:{{notes.length}}</strong> | Удвоенное: {{doubleCountComputed}}           </li>
+          </ul>
+          <div v-else>
+            Заметок пока нет. Добавьте новую
+          </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+  </body>
+   
+
+</html>
